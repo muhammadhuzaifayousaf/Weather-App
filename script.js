@@ -61,34 +61,32 @@ fetch(forecastURL)
     return response.json();
   })
   .then((forecastData) => {
-    console.log("Forecast Data:", forecastData);
-    // Process and display forecast data
-    const forecastContainer = document.createElement('div');
-    forecastContainer.classList.add('forecast-container');
+    const forecastContainer = document.getElementById('forecast-container');
+    forecastContainer.innerHTML = ''; // Clear previous forecast items
 
     // Get forecast data for every 8th entry (3-hour intervals -> approx 1 day)
     forecastData.list.forEach((forecast, index) => {
       if (index % 8 === 0) {
         const day = new Date(forecast.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
-        const temp = forecast.main.temp;
+        const temp = forecast.main.temp.toFixed(2); // Keep temperature with 2 decimals
         const icon = forecast.weather[0].icon;
         const description = forecast.weather[0].description;
 
+        // Create forecast item
         const forecastItem = document.createElement('div');
-        forecastItem.classList.add('forecast-item', 'p-2', 'rounded', 'bg-white/30', 'm-2');
+        forecastItem.classList.add('forecast-item', 'p-6', 'rounded-lg', 'bg-[#0198afb6]', 'text-center', 'shadow-lg', 'flex', 'flex-col', 'items-center', 'justify-center', 'space-y-2');
 
         forecastItem.innerHTML = `
-          <p class="text-white font-bold">${day}</p>
-          <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" class="w-12 h-12" />
-          <p class="text-white">${temp} °C</p>
-          <p class="text-white">${description}</p>
+          <p class="text-sm font-semibold text-white">${day}</p>
+          <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" class="w-16 h-16 mb-1" />
+          <p class="text-lg text-white font-bold">${temp} °C</p>
+          <p class="text-sm text-white font-medium">${description}</p>
         `;
-        
+
+        // Append each forecast item to the container
         forecastContainer.appendChild(forecastItem);
       }
     });
-
-    document.body.appendChild(forecastContainer);
   })
   .catch((error) => {
     console.error("Error fetching forecast:", error);
