@@ -9,18 +9,22 @@
 </head>
 
 <body
-  class="bg-[url('./images/bg_image.jpg')] bg-center bg-cover bg-no-repeat min-h-screen w-full flex flex-col gap-5 items-center justify-start p-10">
+  class="bg-[url('./images/bg_image.jpg')] bg-center bg-cover bg-no-repeat bg-fixed min-h-screen w-full flex flex-col gap-5 items-center justify-start p-10">
   <div class="w-fit flex items-center">
     <h1 class="text-white font-bold text-2xl">Weather Now</h1>
     <img src="./images/116.png" alt="" class="w-14 h-14" srcset="" />
   </div>
 
-  <form action="" method="get" id="form" class="flex w-4/5 md:w-3/5 lg:w-[35%] items-center justify-center gap-2">
+  <form action="" method="get" id="form"
+    class="relative flex w-4/5 md:w-3/5 lg:w-[35%] items-center justify-center gap-2">
     <input type="text" name="city" id="town" placeholder="Enter a city..." required
       class="py-2 px-3 w-full rounded-full bg-white text-white text-lg outline outline-2 backdrop-blur-lg ease-in-out duration-300 outline-white/70 focus:bg-white/20" />
     <button type="submit" class="">
       <ion-icon class="text-white font-black text-2xl p-3 bg-white/50 rounded-full" name="search"></ion-icon>
     </button>
+    <ul id="suggestions"
+      class="absolute top-full left-0 w-full bg-white/20 backdrop-blur-lg text-white z-50 rounded-lg shadow-lg mt-2">
+    </ul>
   </form>
 
   <!-- Home city card -->
@@ -28,7 +32,7 @@
     class="p-5 w-4/5 justify-between flex rounded-3xl shadow-2xl cursor-pointer transform ease-in-out bg-white/20 duration-500 backdrop-blur-sm md:w-3/5 lg:w-[35%] hover:scale-[105%]">
     <div id="left" class="flex flex-col">
       <div id="top" class="mb-6">
-        <p id="temperature-main" class="font-bold text-5xl text-white">
+        <p id="temperature-main" class="font-bold text-4xl text-white">
           24°C
         </p>
         <p class="font-semibold text-md text-white">Now</p>
